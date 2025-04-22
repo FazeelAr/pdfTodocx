@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>response</title>
+</head>
+<body>
+    <h2>Word File Created Successfully!</h2>
+    {% if file_url %}
+        <a href="{{ file_url }}" download>Download Word File</a>
+    {% else %}
+        <p>No file was created.</p>
+    {% endif %}
+    
+</body>
+</html>

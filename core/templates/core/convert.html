@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>convert</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="file">Choose a PDF file to convert:</label>
+        <input type="file" name="file" accept="application/pdf" required>
+        <p></p>
+        <button type="submit" style=" padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-size: 16px;">Convert</button>
+    </form>
+    <br><br>
+    {% if converted_file_url %}
+        <h2>Converted File:</h2>
+        <a href="{{ converted_file_url }}" download>Download Converted File</a>
+    {% endif %}
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+</body>
+</html>
