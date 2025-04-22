@@ -22,7 +22,7 @@ def convert(request):
         if file:
             # Extract text
             extracted_text = pdf_to_text(file)
-
+            name = file.name.split('.')[0]
             # Create Word document
             doc = Document()
             doc.add_heading('Extracted Text from PDF', level=1)
@@ -30,7 +30,7 @@ def convert(request):
                 doc.add_paragraph(line)
 
             # Save Word file
-            word_filename = 'extracted_text.docx'
+            word_filename = f'{name}.docx'
             word_path = os.path.join(settings.MEDIA_ROOT, word_filename)
             doc.save(word_path)
 
