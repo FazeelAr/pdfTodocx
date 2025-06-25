@@ -1,1 +1,1 @@
-from wordConverter.asgi import application  # your Django ASGI app
+from wordConverter.asgi import application as app # your Django ASGI app
