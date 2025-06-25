@@ -1,25 +1,83 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>convert</title>
+    <title>Convert PDF</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        label {
+            font-size: 18px;
+            display: block;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input[type="file"] {
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        h2 {
+            color: #333;
+            margin-top: 30px;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        p {
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="file">Choose a PDF file to convert:</label>
         <input type="file" name="file" accept="application/pdf" required>
-        <p></p>
-        <button type="submit" style=" padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px; font-size: 16px;">Convert</button>
+        <br>
+        <button type="submit">Convert</button>
+
+        {% if converted_file_url %}
+            <h2>Converted File:</h2>
+            <a href="{{ converted_file_url }}" download>Download Converted File</a>
+        {% endif %}
+        
+        {% if error_message %}
+            <p>{{ error_message }}</p>
+        {% endif %}
     </form>
-    <br><br>
-    {% if converted_file_url %}
-        <h2>Converted File:</h2>
-        <a href="{{ converted_file_url }}" download>Download Converted File</a>
-    {% endif %}
-    {% if error_message %}
-        <p style="color: red;">{{ error_message }}</p>
-    {% endif %}
 </body>
 </html>
